@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Write Page</title>
+	<link href="css/style4.css" rel="stylesheet">"
+</head>
+
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a class="forbutton navbtn" href="/allreviews">See All Reviews</a>
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/writereview"
+				th:object="${wrireReviewreq}">
+				<div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+				<div th:if="${succsessmessage}">
+					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
+				</div><br>
+				<div class="input-container">
+					<lable>Star</lable>
+					<select name="star" required>
+						<option value="" disabled selected></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</div>
+				<div class="input-container">
+					<lable>Name </lable>
+					</label> <input type="text" name="name" placeholder="Name" required>
+				</div>
+				<div class="input-container">
+					<lable>Email Id</lable>
+					</label> <input type="text" name="emailid" placeholder="Email Id" required>
+				</div>
+				<div class="input-container">
+					<lable>Write Your Experience</lable>
+					<input type="text" name="message" placeholder="">
+				</div>
+				<input class="forbutton btn" type="submit" name="sign-in" value="Submit Review">
+			</form>
+		</div>
+	</div>
+	<script>
+		document.getElementById('total_fees').addEventListener('change', function () {
+			var selectedValue = this.value;
+			document.getElementById('penting_fees').value = selectedValue;
+		});
+	</script>
+</body>
+
+</html>

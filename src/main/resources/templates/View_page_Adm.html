@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Admission Team Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logoutadm">LogOut</a> 
+		</div>
+	</nav>
+	<div class="login-page" style="width: 50%;">
+		<div class="form">
+	<h1>Welcome Admission Team <span th:text="${un}"></span></h1>
+	<br>
+	<div th:if="${errormessage}">
+		<span th:text="${errormessage}" style="color: red;"></span>
+		</div>
+		<div th:if="${successmessage}">
+		<span th:text="${successmessage}" style="color:darkgreen;"></span>
+		</div><br><br>
+		<a href="/showallapplications" class="forbutton">See Application</a>
+		<a href="/editstudentadm" class="forbutton ">Edit Student</a>
+		<a href="/admitnewstudentadm" class="forbutton">Admit New Entry</a>
+		</div>
+</div>
+</div>
+	</body>
+</html>

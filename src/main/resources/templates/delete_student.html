@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Add User Page</title>
+	<link href="css/style4.css" rel="stylesheet">"
+		<style> 
+		.grid_container{
+			display: grid ;
+			grid-template-columns: 1fr 1fr;
+			grid-auto-rows: minmax(2rem, auto);
+			grid-auto-columns: minmax(3rem, auto);
+			border: 1px solid greenyellow;
+			padding: 0.5rem;
+		}
+		h1{
+			text-align: left;
+		}
+		p{
+			font-weight: 900;
+			text-align: left;
+		}
+	</style>
+
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a class="forbutton navbtn" href="/logout">LogOut</a>
+			<a href="/addstudent" class="forbutton navbtn">Add Student</a>
+			<a href="/askregforedit" class="forbutton navbtn">Edit Student</a>
+			<a href="/showallstudentforstaff" class="forbutton navbtn">All Student Details</a>
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+		<form method="post" autocomplete="off" class="login-form" action="/deletestudent" >
+	<!--	<p>Reg No : <span th:text="${studentDetails.regno}"></span></p>
+		<p>Name :   <span th:text="${studentDetails.name}"></span></p>
+		<p>Date Of Birth : <span th:text="${studentDetails.dob}"></span></p>
+		<p>Gender : <span th:text="${studentDetails.gender}"></span></p>
+		<p>Course : <span th:text="${studentDetails.course}"></span></p>
+		<p>Total Fees : <span th:text="${studentDetails.total_fees}"></span></p>
+		<p>Paid Fees : <span th:text="${studentDetails.paid_fees}"></span></p>
+		<p>Pending Fees : <span th:text="${studentDetails.pending_fees}"></span></p>
+		<p>Contact No : <span th:text="${studentDetails.contact_no}"></span></p>
+		<p>Address  : <span th:text="${studentDetails.address}"></span></p>
+		<p>Password : <span th:text="${studentDetails.password}"></span></p>-->
+		<div class="grid_container">
+			<p>Reg No :</p>
+			<p th:text="${studentDetails.regno}"></p>
+			<p>Name : </p>
+			<p th:text="${studentDetails.name}"></p>
+			<p>Date Of Birth : </p>
+			<p th:text="${studentDetails.dob}"></p>
+			<p>Gender : </p>
+			<p th:text="${studentDetails.gender}"></p>
+			<p>Course : </p>
+			<p th:text="${studentDetails.course}"></p>	
+			<p>Total Fees : </p>
+			<p th:text="${studentDetails.total_fees}"></p>	
+			<p>Paid Fees : </p>
+			<p th:text="${studentDetails.paid_fees}"></p>	
+			<p>Pending Fees : </p>
+			<p th:text="${studentDetails.pending_fees}"></p>	
+			<p>Contact No : </p>
+			<p th:text="${studentDetails.contact_no}"></p>	
+			<p>Address : </p>
+			<p th:text="${studentDetails.address}"></p>	
+			<p>Password : </p>
+			<p th:text="${studentDetails.password}"></p>	
+		</div>
+      <input class="forbutton btn" type="submit" name="sign-in" value="DeleteStudent">
+			<div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Personal Page</title>
+				<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a> 
+		</div>
+	</nav>
+	<div class="login-page" style="width: 50%;">
+		<div class="form">
+	<h1>Welcome Mr/Mrs <span th:text="${Username}"></span></h1>
+	<br>
+			<a href="/adduser" class="forbutton">Add User</a>
+			<a href="/askid" class="forbutton">Edit User</a>
+			<a href="/askpidfordelete" class="forbutton">Delete User</a>
+			<a href="/showall" class="forbutton">All User Details</a>
+			</div>
+</div>
+</body> 
+</html> 

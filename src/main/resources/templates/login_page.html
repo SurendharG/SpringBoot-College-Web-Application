@@ -1,27 +1,39 @@
 <!doctype html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="utf-8">
 	<title>Login Page</title>
-		<link rel="stylesheet" href="css/style.css">
+	<link href="css/style.css" rel="stylesheet">"
 </head>
 <body>
-<div class="form">
-  <form method="post" action="/login" th:object="${loginRequest}">
-    <h2>Login</h2>
-    <div class="input-box">
-      <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="text" name="login" placeholder="Login" required>
-    </div>
-    <div class="input-box">
-      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-      <input type="password" name="password" placeholder="Password" required id="passwordInput">
-    </div>
-    <div class="input-box">
-      <input type="submit" name="sign-in" value="Login">
-    </div>
-    <a href="/register">Navigate to register</a>
-  </form>
-</div>	
-</body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a> 
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/login" th:object="${loginRequest}" onsubmit="return validateInput()">
+				<h2 >Login</h2>
+				<input type="number" name="personalid" placeholder="Personal Id" required id="inputNumber">
+				<input type="password" name="password" placeholder="Password" required id="passwordInput">
+				<input class="forbutton btn" type="submit" name="sign-in" value="Login">
+				<div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+  function validateInput() {
+    var number = document.getElementById("inputNumber").value;
+    if (number < 0 || number > 2147483646) {
+      alert("Invalid Personal ID");
+      return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+  }
+</script>
+	</body>
 </html>

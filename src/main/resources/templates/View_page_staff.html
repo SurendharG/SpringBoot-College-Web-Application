@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Staff Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a> 
+		</div>
+	</nav>
+	<div class="login-page" style="width: 50%;">
+		<div class="form">
+	<h1>Welcome Staff <span th:text="${un}"></span></h1>
+	<br>
+			<a href="/addstudent" class="forbutton">Add Student</a>
+			<a href="/askregforedit" class="forbutton">Edit Student</a>
+			<a href="/askregfordelete" class="forbutton">Delete Student</a>
+			<a href="/showallstudentforstaff" class="forbutton">All Student Details</a>
+			</div>
+</div>
+	<!--<div><nav>
+   <h2 th:object="${staffunpa}"> Test Page Here </h2>
+<p th:text="${un}"></p>
+<p th:text="${pa}"></p></nav>
+</div>-->
+	</body>
+</html>

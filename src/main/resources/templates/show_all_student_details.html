@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>All Student Detail Page</title>
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		body{
+			display: flex;
+			justify-content: center; 
+			align-items: center;
+		}
+		table{
+			border-collapse: collapse;
+			width: 50%;
+			
+		}
+		th,td{
+			padding: 8px;
+			text-align: start;
+			border: 1px solid grey;
+		}
+		thead tr th {
+			color: floralwhite;
+		}
+		tbody tr{
+			background-color: #f5f5f5;
+		}
+		tbody tr:hover{
+			background-color: rgb(219, 208, 219);
+			color: ghostwhite;
+		}
+		th{
+			background-color: #4caf50;
+		}
+		tfoot{
+			background-color: #40524a;
+			color:white;
+		}
+	</style>
+	
+</head>
+<body >
+			<nav class="navbar">
+		<div class="navbar-container">
+			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a class="forbutton navbtn" href="/logout">LogOut</a>
+			<a href="/addstudent" class="forbutton navbtn">Add Student</a>
+			<a href="/askregforedit" class="forbutton navbtn">Edit Student</a>
+			<a href="/askregfordelete" class="forbutton navbtn">Delete Student</a>
+		</div>
+	</nav>
+
+		<table action="/showallstudentforstaff" th:object="${ShowallStudent}">
+			<thead>
+				<tr>
+					<th scope="col">Reg No</th>
+					<th scope="col">Name</th>
+					<th scope="col">Date_Of_Birth </th>
+					<th scope="col">Gender</th>
+					<th scope="col">Course</th>
+					<th scope="col">Total Fees</th>
+					<th scope="col">Paid Fees</th>
+					<th scope="col">Pending Fees</th>
+					<th scope="col">Contact No</th>
+					<th scope="col">Address</th>
+					<th scope="col">Password</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+</tr>
+				<tr th:each="ud:${ShowallStudent}">
+					<td th:text="${ud.regno}"></td>
+					<td th:text="${ud.name}"></td>
+					<td th:text="${ud.dob}"></td>
+					<td th:text="${ud.gender}"></td>
+					<td th:text="${ud.course}"></td>
+					<td th:text="${ud.total_fees}"></td>
+					<td th:text="${ud.paid_fees}"></td>
+					<td th:text="${ud.pending_fees}"></td>
+					<td th:text="${ud.contact_no}"></td>
+					<td th:text="${ud.address}"></td>
+					<td th:text="${ud.password}"></td>
+					</tr>
+			</tbody>
+		</table>
+</body>
+</html>

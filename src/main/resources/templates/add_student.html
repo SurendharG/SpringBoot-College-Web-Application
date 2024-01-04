@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Add User Page</title>
+	<link href="css/style4.css" rel="stylesheet">"
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a>
+			<a href="/askregforedit" class="forbutton navbtn">Edit Student</a>
+			<a href="/askregfordelete" class="forbutton navbtn">Delete Student</a>
+			<a href="/showallstudentforstaff" class="forbutton navbtn">All Student Details</a>
+			 
+		</div>
+	</nav>
+	<div class="login-page">
+	<div class="form">
+	<form method="post" autocomplete="off" class="login-form" action="/addingStudent" th:object="${AddStudentRequest}">
+		<h3>Regno <span th:text="${regnopass}"></span></h3>
+		<input type="hidden" name="regno" th:value="${regnopass}">
+		<div class="input-container">
+		<lable>Name  </lable>
+ </label>     <input type="text" name="name" placeholder="Name" required>
+ </div>
+ <div class="input-container">
+ 		<lable>Date Of Birth</lable>
+      <input type="date" name="dob" placeholder="Date Of Birth" required>
+      </div>
+      <div class="input-container">
+      		<lable>Gender</lable>
+      <select name="gender" required>  <option value="" disabled selected></option><option value="male">Male</option><option value="female">Female</option></select></div>
+     		<div class="input-container">
+     		<lable>Course</lable>
+      <select name="course" required>  <option value="" disabled selected></option><option value="BE-ECE">BE-ECE</option><option value="BE-EEE">BE-EEE</option><option value="BE-CSC">BE-CSC</option><option value="BE-MECH">BE-MECH</option></select>
+      			</div>
+      			<div class="input-container">
+      			<lable>Admission Quata</lable>
+      <select name="total_fees" id="total_fees" required>
+    <option value="" disabled selected> </option>
+    <option value="50000">Management Quota</option>
+    <option value="25000">Govt Quota</option>
+    </select>
+    </div>
+    
+    <input type="hidden" name="paid_fees" value="0">
+    <input type="hidden" name="penting_fees" id="penting_fees">
+    <div class="input-container">
+     		<lable>Contact No</lable>
+     <input type="number" name="contact_no" placeholder="Contact No" required>
+     </div>
+      <div class="input-container">
+     		<lable>Address</lable>
+      <input type="text" name="address" placeholder="Address" >
+      </div>
+      <div class="input-container">
+       		<lable>Password</lable>
+       
+       <input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+       </div>
+    <input class="forbutton btn" type="submit" name="sign-in" value="addingStudent">
+      
+      <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+				 <div th:if="${succsessmessage}">
+					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
+				</div>
+  </form></div>
+</div>
+<script>
+    document.getElementById('total_fees').addEventListener('change', function() {
+        var selectedValue = this.value;
+        document.getElementById('penting_fees').value = selectedValue;
+    });
+</script>
+</body>
+</html>

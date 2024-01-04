@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Add User Page</title>
+	<link href="css/style4.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>			 			
+			 <a href="/showallapplications" class="forbutton navbtn">See Application</a>
+			 <a href="/admitnewstudentadm" class="forbutton navbtn">Admit New Entry</a>
+			<a class="forbutton navbtn" href="/logoutadm">LogOut</a>
+			</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/updatestudentadm"
+				<h3>Regno <span th:text="${studentDetails.regno}"></span></h3>
+				<input type="hidden" name="regno" th:value="${studentDetails.regno}">
+				<h3>Name <span th:text="${studentDetails.name}"></span></h3>
+				<input type="hidden" name="name" th:value="${studentDetails.name}">
+				<input type="hidden" name="dob" th:value="${studentDetails.dob}">
+				<input type="hidden" name="gender" th:value="${studentDetails.gender}">
+				<input type="hidden" name="address" th:value="${studentDetails.address}">
+				<input type="hidden" name="contact_no" th:value="${studentDetails.contact_no}">
+				<input type="hidden" name="password" th:value="${studentDetails.password}">
+
+			
+				<div class="input-container">
+					<lable>Course</lable>
+					<select name="course" required th:field="${studentDetails.course}">
+						<option value="BE-ECE">BE-ECE</option>
+						<option value="BE-EEE">BE-EEE</option>
+						<option value="BE-CSC">BE-CSC</option>
+						<option value="BE-MECH">BE-MECH</option>
+					</select>
+				</div>					
+				<div class="input-container">
+					<lable>Quata</lable>
+					<select id="totalFeesSelect" name="total_fees" required onchange="updatePendingFees()">
+						<option value="" disabled selected></option>
+						<option value="50000">Management</option>
+						<option value="25000">Govt</option>
+					</select>
+				</div>	
+				<input type="hidden" id="pendingFeesInput"  name="pending_fees" value="" >
+				<input type="hidden" name="paid_fees" th:value="${studentDetails.paid_fees}" >
+			<input class="forbutton btn" type="submit" name="sign-in" value="updatestudent">
+				<div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+				<div th:if="${succsessmessage}">
+					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+    function updatePendingFees() {
+        var totalFeesSelect = document.getElementById('totalFeesSelect');
+        var pendingFeesInput = document.getElementById('pendingFeesInput');
+        pendingFeesInput.value = totalFeesSelect.value;
+    }
+</script>
+</body>
+</html>

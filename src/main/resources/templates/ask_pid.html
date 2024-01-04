@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Asking Personal ID Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/Logoutuser">LogOut</a>
+			<a href="/adduser" class="forbutton navbtn">Add User</a>
+			<a href="/askpidfordelete" class="forbutton navbtn">Delete User</a>
+			<a href="/showall" class="forbutton navbtn">All User Details</a>
+			 
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/askid" th:object="${editRequest}">
+				 <h2>For Edit User Details</h2>
+				 <input class="form_input" type="number" property="none" name="personalid" placeholder="Personal Id" required>
+				 <input class="forbutton btn"  type="submit" name="Edit User" value="askid">
+				 <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				 </div>
+				<div th:if="${successmessage}">
+					<span th:text="${successmessage}" style="color:green;"></span>
+				</div>
+				
+
+			</form>
+		</div>
+	</div>
+	</body>
+</html>

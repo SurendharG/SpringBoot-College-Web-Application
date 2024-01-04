@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Asking Personal ID Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a>
+			 <a href="/addstudent" class="forbutton navbtn">Add Student</a>
+			<a href="/askregfordelete" class="forbutton navbtn">Delete Student</a>
+			<a href="/showallstudentforstaff" class="forbutton navbtn">All Student Details</a>
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/askregforedit" >
+				 <h2>For Edit Student Details</h2>
+				 <input class="form_input" type="number" property="none" name="regno" placeholder="  Reg No" required>
+				 <input class="forbutton btn"  type="submit" name="Check Reg No" value="checkregno">
+				 <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				 </div>
+				<div th:if="${successmessage}">
+					<span th:text="${successmessage}" style="color:green;"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+	</body>
+</html>

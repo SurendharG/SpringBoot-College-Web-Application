@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Add User Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a>
+			<a href="/askid" class="forbutton navbtn">Edit User</a>
+			<a href="/askpidfordelete" class="forbutton navbtn">Delete User</a>
+			<a href="/showall" class="forbutton navbtn">All User Details</a>
+		</div>
+	</nav>
+	<div class="login-page">
+	<div class="form">
+	<form method="post" autocomplete="off" class="login-form" action="/adduser" th:object="${AdduserRequest}">
+      <input type="number" name="personalid" placeholder="Personal ID" required>
+      <input type="text" name="username" placeholder="User Name" required>
+      <input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+      <select name="access">  <option value="" disabled selected>Access</option><option value="Staff">Staff</option><option value="adm">Admission Team</option><option value="acc">Account Team</option></select>
+      <input class="forbutton btn" type="submit" name="sign-in" value="adduser">
+      
+      <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+				 <div th:if="${succsessmessage}">
+					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
+				</div>
+  </form></div>
+</div>
+</body>
+</html>

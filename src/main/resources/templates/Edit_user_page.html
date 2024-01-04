@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Edit User Page</title>
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/Logoutuser">LogOut</a> 
+			 <a href="/adduser" class="forbutton navbtn">Add User</a>
+			<a href="/askpidfordelete" class="forbutton navbtn">Delete User</a>
+			<a href="/showall" class="forbutton navbtn">All User Details</a>
+		</div>
+	</nav>
+	<div class="login-page">
+	<div class="form">
+	<form method="post" autocomplete="off" class="login-form" action="/updateuser"  >
+		<h3>Personal Id : <span th:text="${getpid}"></span></h3>
+		<input type="hidden" name="personalid" th:value="${getpid}">
+      <input type="text" name="username" placeholder="User name" th:value="${getuname}" required>
+      <input type="text" name="password" placeholder="password" th:value="${getpassword}" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+      <select name="access">  <option value="" disabled selected>Access</option><option value="Staff">Staff</option><option value="adm">Admission Team</option><option value="acc">Account Team</option></select>
+      <input class="forbutton btn" type="submit" name="sign-in" value="Update">
+      <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+				 <div th:if="${succsessmessage}">
+					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
+				</div>
+  </form></div>
+</div>
+</body>
+</html>

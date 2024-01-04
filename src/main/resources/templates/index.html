@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ABC College</title>
+	<link rel="stylesheet" href="css/style2.css">
+</head>
+
+<body>
+	<nav class="navbar">
+		<h1 class="heading">Welcome to the ABC College</h1>
+		<div class="navbar_container">
+			<a class="forbutton navbtn" href="/login">Log In</a>
+			<a class="forbutton navbtn" href="/studentlogin">Student Log In</a>
+		</div>
+	</nav>
+	<header>
+<div><p>Reviews : 
+		<span th:text="${reviewavg}" style="color:darkgreen;"></span>
+		<span style="color:gold;"> &#9733 </span>
+		<span>( <span th:text="${reviewcount}" style="color:darkgreen;"></span> reviews)</span>
+			</p>
+			<a href="/allreviews">See All Reviews</a>
+</div>
+<div><marquee >
+			<ul>
+				Overview
+				<li>Located in [City, Country], ABC Engineering College is a premier institution known for its commitment to excellence in engineering education.</li>
+			</ul>
+			<ul>History:
+				<li>
+					Established in [Year], the college has a rich legacy of nurturing bright minds and producing top-notch engineers.
+				</li>
+			</ul>
+			<ul>Infrastructure:
+				<li>
+					State-of-the-art labs equipped with the latest technology.
+				</li>
+				<li>
+					Modern classrooms with audio-visual aids.
+				</li>
+				<li>
+					Spacious library with a vast collection of books, journals, and digital resources.
+				</li>
+				<li>Wi-Fi-enabled campus ensuring connectivity for students and faculty.
+				</li>
+			</ul>
+			<ul>Courses Offered:
+				<li>
+					Bachelor of Technology (B.Tech) in [Branches like Computer Science, Mechanical, Electronics, etc.]
+				</li>
+				<li>
+					Master of Technology (M.Tech) in [Specializations]
+				</li>
+				<li>
+					PhD programs in various engineering disciplines.
+				</li>
+			</ul>
+			<ul>Placement:
+				<li>
+					Excellent placement record with leading companies visiting the campus for recruitment.
+				</li>
+				<li>
+					Career guidance and training sessions to prepare students for interviews and job placements.
+				</li>
+			</ul>
+			<ul>Research & Development:
+				<li>
+					Active research centers focusing on cutting-edge technologies and innovations.
+				</li>
+				<li>
+					Collaboration with industries and research organizations for collaborative projects.
+				</li>
+			</ul>
+			</marquee>
+	</div>
+	</header>
+	<section>
+		<p>
+			Admission going on for 2024
+		</p>
+		<a  href="/applicationform">Admission Application</a>
+	</section>
+	<footer>
+		<div>
+			<p>ABC College - Chennai</p>
+			<p>04404-111111</p>
+			<p>abcoffice.abcengg.in</p>
+		</div>
+	</footer>
+</body>
+
+</html>
