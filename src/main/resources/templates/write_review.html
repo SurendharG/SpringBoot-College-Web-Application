@@ -3,10 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Write Page</title>
+	<title>Write Review Page</title>
 	<link href="css/style4.css" rel="stylesheet">"
 </head>
-
+<style>
+	span {
+		color: red;
+	}
+</style>
 <body>
 	<nav class="navbar">
 		<div class="navbar-container">
@@ -17,7 +21,7 @@
 	<div class="login-page">
 		<div class="form">
 			<form method="post" autocomplete="off" class="login-form" action="/writereview"
-				th:object="${wrireReviewreq}">
+				th:object="${wrireReviewreq}" onsubmit="return compareDates()">
 				<div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				</div>
@@ -25,7 +29,7 @@
 					<span th:text="${succsessmessage}" style="color:darkgreen;"></span>
 				</div><br>
 				<div class="input-container">
-					<lable>Star</lable>
+					<lable><span>* </span>Star</lable>
 					<select name="star" required>
 						<option value="" disabled selected></option>
 						<option value="1">1</option>
@@ -36,27 +40,59 @@
 					</select>
 				</div>
 				<div class="input-container">
-					<lable>Name </lable>
-					</label> <input type="text" name="name" placeholder="Name" required>
+					<lable><span>* </span>Name </lable>
+					</label> <input type="text" name="name" placeholder="Name" required maxlength="100" id="Namee">
 				</div>
 				<div class="input-container">
-					<lable>Email Id</lable>
-					</label> <input type="text" name="emailid" placeholder="Email Id" required>
+					<lable><span>* </span>Email Id</lable>
+					</label> <input type="email"name="emailid" placeholder="Email Id" required maxlength="100" id="EmailId">
 				</div>
 				<div class="input-container">
-					<lable>Write Your Experience</lable>
-					<input type="text" name="message" placeholder="">
+					<lable><span>&nbsp;&nbsp;</span>Write Your Experience</lable>
+					<input type="text" name="message" placeholder="" maxlength="250">
 				</div>
+									<p style="color: red;">* Mandatory Details</p>
 				<input class="forbutton btn" type="submit" name="sign-in" value="Submit Review">
 			</form>
 		</div>
 	</div>
 	<script>
-		document.getElementById('total_fees').addEventListener('change', function () {
-			var selectedValue = this.value;
-			document.getElementById('penting_fees').value = selectedValue;
-		});
+		
+		function validateEmail(email) {
+          let regex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+          if (regex.test(email)) {
+              console.log("valid");
+              return true;
+          } 
+          else {
+              console.log("invalid");
+              return false;
+         }
+       }
+		
+		
+		
+		function Stringcheck(name) {
+			var specialCharacterPattern = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+			var containsSpecialCharacter = specialCharacterPattern.test(name);
+			 var numberPattern = /\d/
+			 var containsNumber = numberPattern.test(name);
+			     return containsSpecialCharacter || containsNumber;
+		}		
+		function compareDates() {
+			var em = document.getElementById("EmailId")
+			var Name = document.getElementById("Namee")
+			if (!validateEmail(em.value)) {
+				console.log(validateEmail(em.value));
+				alert("Mail Id is Not valid");
+				return false;
+			}
+			if (Stringcheck(Name.value)) {
+				alert("Name Should be albhapets Only");
+				return false;
+			}
+			return true
+		}
 	</script>
 </body>
-
 </html>

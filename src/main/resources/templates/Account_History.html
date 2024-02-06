@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Account History</title>
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		body{
+			display: flex;
+			justify-content: center; 
+			align-items: center;
+		}
+		table{
+			position: absolute;
+			top:8rem;
+			border-collapse: collapse;
+			width:90%;			
+		}
+		th,td{
+			padding: 8px;
+			text-align: start;
+			border: 1px solid grey;
+		}
+		thead tr th {
+			color: floralwhite;
+		}
+		tbody tr{
+			background-color: #f5f5f5;
+		}
+		tbody tr:hover{
+			background-color: rgb(219, 208, 219);
+			color: ghostwhite;
+		}
+		th{
+			background-color: #4caf50;
+		}
+		tfoot{
+			background-color: #40524a;
+			color:white;
+		}
+	</style>
+	
+</head>
+<body >
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a href="/acclogin" class="forbutton navbtn">Menu</a>	
+			 <a href="/payfees" class="forbutton navbtn">Pay Fees</a>
+ 			 <a class="forbutton navbtn" href="/logoutacc">LogOut</a> 
+		</div>
+	</nav>
+		<table action="/showall" th:object="${Listes}">
+			<thead>
+				<tr>
+					<th scope="col">Transaction No</th>
+					<th scope="col">Staff Personal ID</th>
+					<th scope="col">Date of Paid</th>
+					<th scope="col">Time of Paid</th>
+					<th scope="col">Student Name</th>
+					<th scope="col">Student Reg No</th>
+					<th scope="col">Student Course</th>
+					<th scope="col">Amount of Paid</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				</div>
+</tr>
+				<tr th:each="UserssModel:${Listes}">
+					<td th:text="${UserssModel.tno}"></td>
+					<td th:text="${UserssModel.username}"></td>
+					<td th:text="${UserssModel.date}"></td>
+					<td th:text="${UserssModel.time}"></td>
+					<td th:text="${UserssModel.name}"></td>
+					<td th:text="${UserssModel.regno}"></td>
+					<td th:text="${UserssModel.course}"></td>
+					<td th:text="${UserssModel.amount_paid}"></td>
+					</tr>
+			</tbody>
+		</table>
+</body>
+</html>

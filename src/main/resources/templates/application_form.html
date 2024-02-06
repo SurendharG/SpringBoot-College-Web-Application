@@ -3,9 +3,14 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Add User Page</title>
-	<link href="css/style4.css" rel="stylesheet">"
+	<title>Application Page</title>
+	<link href="css/style4.css" rel="stylesheet">
 </head>
+<style>
+	span {
+		color: red;
+	}
+</style>
 
 <body>
 	<nav class="navbar">
@@ -15,95 +20,258 @@
 	</nav>
 	<div class="login-page">
 		<div class="form">
-			<form method="post" autocomplete="off" class="login-form" action="/applicationform"
-				th:object="${ApplicationRequest}">
-				<div th:if="${errorMessage}">
-					<span th:text="${errorMessage}" style="color: red;"></span>
+			<div th:if="${Abc}">
+				<form method="post" autocomplete="off" class="login-form" action="/applicationformconfirm"
+					th:object="${ApplicationRequest}" onsubmit="return compareDates()">
 					<br>
-				</div>
-				<div th:if="${successmessage}">
-					<span th:text="${successmessage}" style="color:darkgreen;"></span>
-					<br>
-					<span style="color: black;">Your Application Number : </span>
-					<span th:text="${id}" style="color: black;"></span>
-					<br>
-				</div>
-				<br>
-				<div class="input-container">
-					<lable>Name </lable>
-					<input type="text" name="name" placeholder="Name" required>
-				</div>
-				<div class="input-container">
-					<lable>Parent Name </lable>
-					<input type="text" name="parent_name" placeholder="Parent Name">
-				</div>
-				<div class="input-container">
-					<lable>Date Of Birth</lable>
-					<input type="date" name="dob" placeholder="Date Of Birth" required>
-				</div>
-				<div class="input-container">
-					<lable>Gender</lable>
-					<select name="gender" required>
-						<option value="Gender" disabled selected></option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
-				</div>
-				<div class="input-container">
-					<lable>Course</lable>
-					<select name="course" required>
-						<option value="Cousre" disabled selected></option>
-						<option value="BE-ECE">BE-ECE</option>
-						<option value="BE-EEE">BE-EEE</option>
-						<option value="BE-CSC">BE-CSC</option>
-						<option value="BE-MECH">BE-MECH</option>
-					</select>
-				</div>
-				<div class="input-container">
-					<lable>Contact No</lable>
-					<input type="text" name="contact_no" placeholder="Contact No" required pattern="^[6-9]\d{9}$" title="Please enter a 10-digit number starting with 6 or above.">
-				</div>
-				<div class="input-container">
-					<lable>Address</lable>
-					<input type="text" name="address" placeholder="Address">
-				</div>
-				<div class="input-container">
-					<lable>Email</lable>
-					<input type="email" name="emailid" placeholder="Email Id" required>
-				</div>
-				<div class="input-container">
-					<lable>SSLC School Name</lable>
-					<input type="text" name="sslc_school_name" placeholder="SSLC School Name" >
-				</div>
-				<div class="input-container">
-					<lable>SSLC Mark</lable>
-					<input type="number" name="sslc_mark" placeholder="In %" >
-				</div>
-				<div class="input-container">
-					<lable>HSC School Name</lable>
-					<input type="text" name="hsc_school_name" placeholder="If Completed">
-				</div>
-				<div class="input-container">
-					<lable>HSC MarK</lable>
-					<input type="number" name="hsc_mark" placeholder="In %">
-				</div>
-				<div class="input-container">
-					<lable>Diplomo University Name</lable>
-					<input type="text" name="diplomo_college_name" placeholder="If Completed">
-				</div>
-				<div class="input-container">
-					<lable>Diplomo Mark</lable>
-					<input type="number" name="diplomo_mark" placeholder="In %">
-				</div>
-				<input class="forbutton btn" type="submit" name="sign-in" value="Apply">
-			</form>
+					<div class="input-container">
+						<lable> <span>* </span>Name </lable>
+						<input type="text" name="name" placeholder="Name" required maxlength="150" id="Namee">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Parent Name </lable>
+						<input type="text" name="parent_name" placeholder="Parent Name" maxlength="150" id="ParendtNamee">
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Date Of Birth </lable>
+						<input type="date" name="dob" placeholder="Date Of Birth" required id="firstdate">
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Gender</lable>
+						<select name="gender" required>
+							<option value="" disabled selected></option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Course</lable>
+						<select name="course" required>
+							<option value="" disabled selected></option>
+							<option value="BE-ECE">BE-ECE</option>
+							<option value="BE-EEE">BE-EEE</option>
+							<option value="BE-CSC">BE-CSC</option>
+							<option value="BE-MECH">BE-MECH</option>
+						</select>
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Contact No </lable>
+						<input type="text" name="contact_no" placeholder="Contact No" required pattern="^[6-9]\d{9}$"
+							title="Please enter a 10-digit number starting with 6 or above.">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Address</lable>
+						<input type="text" name="address" placeholder="Address" maxlength="250">
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Email </lable>
+						<input type="email" name="emailid" placeholder="Email Id" required maxlength="100" id="EmailId">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>SSLC School Name</lable>
+						<input type="text" name="sslc_school_name" placeholder="SSLC School Name" maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>SSLC Mark</lable>
+						<input type="number" name="sslc_mark" placeholder="In %" step="0.01" max="100">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>HSC School Name</lable>
+						<input type="text" name="hsc_school_name" placeholder="If Completed" maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>HSC MarK</lable>
+						<input type="number" name="hsc_mark" placeholder="In %" max="100" step="0.01">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Diplomo University Name</lable>
+						<input type="text" name="diplomo_college_name" placeholder="If Completed" maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Diplomo Mark</lable>
+						<input type="number" name="diplomo_mark" placeholder="In %" max="100" step="0.01">
+					</div>
+					<p style="color: red;">* Mandatory Details</p>
+
+					<input class="forbutton btn" type="submit" value="Apply">
+				</form>
+			</div>
+
+
+			<div th:if="${Abcde}">
+				
+				<form method="post" autocomplete="off" class="login-form" action="/applicationformconfirm"
+					th:object="${Applicationconfirmation}" onsubmit="return compareDates()">
+					<div class="input-container">
+						<lable> <span>* </span>Name </lable>
+						<input type="text" name="name" th:value="${Applicationconfirm.name}" placeholder="Name" required
+							maxlength="150" id="Namee">
+					</div>
+					
+					
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Parent Name </lable>
+						<input type="text" name="parent_name" th:value="${Applicationconfirm.parent_name}"
+							placeholder="Parent Name" maxlength="150" id="ParendtNamee">
+					</div>
+			
+					<div class="input-container">
+						<lable><span>* </span>Date Of Birth </lable>
+						<input type="date" name="dob" th:value="${Applicationconfirm.dob}" placeholder="Date Of Birth"
+							required id="firstdate">
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Gender </lable>
+						<select name="gender" required th:field="${Applicationconfirm.gender}">
+							<option value="" disabled selected></option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					</div>
+					
+					<div class="input-container">
+						<lable><span>* </span>Course</lable>
+						<select name="course" required th:field="${Applicationconfirm.course}">
+							<option value="" disabled selected></option>
+							<option value="BE-ECE">BE-ECE</option>
+							<option value="BE-EEE">BE-EEE</option>
+							<option value="BE-CSC">BE-CSC</option>
+							<option value="BE-MECH">BE-MECH</option>
+						</select>
+					</div>
+					<div class="input-container">
+						<lable><span>* </span>Contact No </lable>
+						<input type="text" name="contact_no" th:value="${Applicationconfirm.contact_no}"
+							placeholder="Contact No" required pattern="^[6-9]\d{9}$"
+							title="Please enter a 10-digit number starting with 6 or above.">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Address</lable>
+						<input type="text" name="address" th:value="${Applicationconfirm.address}" placeholder="Address"
+							maxlength="250">
+					</div>
+					
+					<div class="input-container">
+						<lable><span>* </span>Email </lable>
+						<input type="email" name="emailid" th:value="${Applicationconfirm.emailid}"
+							placeholder="Email Id" required maxlength="100"  id="EmailId">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>SSLC School Name</lable>
+						<input type="text" name="sslc_school_name" th:value="${Applicationconfirm.sslc_school_name}"
+							placeholder="SSLC School Name" maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>SSLC Mark</lable>
+						<input type="number" name="sslc_mark" th:value="${Applicationconfirm.sslc_mark}" placeholder="In %" step="0.01" max="100">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>HSC School Name</lable>
+						<input type="text" name="hsc_school_name" th:value="${Applicationconfirm.hsc_school_name}"
+							placeholder="If Completed" maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>HSC MarK</lable>
+						<input type="number" name="hsc_mark" th:value="${Applicationconfirm.hsc_mark}"
+							placeholder="In %" max="100" step="0.01">
+					</div>
+							
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Diplomo University Name</lable>
+						<input type="text" name="diplomo_college_name"
+							th:value="${Applicationconfirm.diplomo_college_name}" placeholder="If Completed"
+							maxlength="150">
+					</div>
+					<div class="input-container">
+						<lable><span>&nbsp;&nbsp;</span>Diplomo Mark</lable>
+						<input type="number" name="diplomo_mark" th:value="${Applicationconfirm.diplomo_mark}"
+							placeholder="In %" max="100" step="0.01">
+					</div>
+					<p style="color: red;">* Mandatory Details</p>
+					<input class="forbutton btn" type="submit" value="Apply">
+				</form>
+				
+			</div>
 		</div>
 	</div>
 	<script>
-		document.getElementById('total_fees').addEventListener('change', function () {
-			var selectedValue = this.value;
-			document.getElementById('penting_fees').value = selectedValue;
-		});
+		/*
+		function validateEmail(email) {
+			var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (email.match(EMAIL_PATTERN)) {
+				console.log("valid");
+				return true;
+			}
+			else {
+				console.log("invalid");
+				return false;
+			}
+		} 
+		
+		function validateEmail(email) {
+			let regex = new RegExp("[a-z0-9]+@[a-z0-9]+\.[a-z]{2,3}")
+			if (regex.test(email)) {
+				console.log("valid");
+				return true;
+			}
+			else {
+				console.log("invalid");
+				return false;
+			}
+		}*/
+		
+		function validateEmail(email) {
+          let regex = /^[a-z0-9._-]+@[a-z.-]+\.[c,o,m,i,n]{2,4}$/;
+          if (regex.test(email) && (email.endsWith("com") || email.endsWith("co.in")|| email.endsWith("in")|| email.endsWith("org"))) {
+              console.log("valid");
+              
+              return true;
+          } 
+          else {
+              console.log("invalid");
+              return false;
+         }
+       }
+		 
+		function Stringcheck(name) {
+			var specialCharacterPattern = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+			var containsSpecialCharacter = specialCharacterPattern.test(name);
+			 var numberPattern = /\d/
+			 var containsNumber = numberPattern.test(name);
+			     return containsSpecialCharacter || containsNumber;
+
+		}
+		
+
+		
+		function compareDates() {
+			var firstDateInput = document.getElementById("firstdate");
+			var firstDate = firstDateInput.value;
+			var date1 = new Date(firstDate);
+			var currentdate = new Date();
+			var date2 = new Date(currentdate.getFullYear() - 17, currentdate.getMonth(), currentdate.getDate());
+			var em = document.getElementById("EmailId")
+			var Name = document.getElementById("Namee")
+			var ParentName = document.getElementById("ParendtNamee")
+			if (date1 > date2) {
+				alert("Age Must Be 17 Years Old Please Check The DOB");
+				return false;
+			}
+			if (!validateEmail(em.value)) {
+				console.log(validateEmail(em.value));
+				alert("Mail Id is Not valid");
+				return false;
+			}
+			if (Stringcheck(Name.value)) {
+				alert("Name Should be albhapets Only");
+				return false;
+			}
+			if (Stringcheck(ParentName.value)) {
+				alert("Parent Name Should be albhapets Only");
+				return false;
+			}
+			return true
+		}
 	</script>
 </body>
 

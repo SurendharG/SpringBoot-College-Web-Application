@@ -2,31 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Add User Page</title>
+	<title>Edit Student Details</title>
 	<link href="css/style4.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar">
 		<div class="navbar-container">
 			<a class="forbutton navbtn" href="/">Navigate to Home</a>
-			<a class="forbutton navbtn" href="/logout">LogOut</a>
+			<a href="/stafflogin" class="forbutton navbtn">Menu</a>
 			<a href="/addstudent" class="forbutton navbtn">Add Student</a>
 			<a href="/askregfordelete" class="forbutton navbtn">Delete Student</a>
 			<a href="/showallstudentforstaff" class="forbutton navbtn">All Student Details</a>
+			<a class="forbutton navbtn" href="/logout">LogOut</a>
 		</div>
 	</nav>
 	<div class="login-page">
 		<div class="form">
-			<form method="post" autocomplete="off" class="login-form" action="/updatestudent"
+			<form method="post" autocomplete="off" class="login-form" action="/updatestudent" onsubmit="return compareDates()">
 				<h3>Regno <span th:text="${studentDetails.regno}"></span></h3>
 				<input type="hidden" name="regno" th:value="${studentDetails.regno}">
 				<div class="input-container">
 					<lable>Name </lable>
-					</label> <input type="text" name="name" placeholder="Name" th:value="${studentDetails.name}"required>
+					</label> <input type="text" name="name" placeholder="Name" th:value="${studentDetails.name}"required maxlength="150" id="Namee">
 				</div>
 				<div class="input-container">
 					<lable>Date Of Birth</lable>
-					<input type="date" name="dob" placeholder="Date Of Birth" th:value="${studentDetails.dob}" required>
+					<input type="date" name="dob" placeholder="Date Of Birth" th:value="${studentDetails.dob}" required id="firstdate">
 				</div>
 				<div class="input-container">
 					<lable>Gender</lable>
@@ -49,20 +50,20 @@
 				<input type="hidden" name="pending_fees" th:value="${studentDetails.pending_fees}" >
 				<div class="input-container">
 					<lable>Contact No</lable>
-					<input type="number" name="contact_no" placeholder="Contact No" th:value="${studentDetails.contact_no}" required>
+					<input type="number" name="contact_no" placeholder="Contact No" th:value="${studentDetails.contact_no}" required pattern="^[6-9]\d{9}$" title="Please enter a 10-digit number starting with 6 or above.">
 				</div>
 				<div class="input-container">
 					<lable>Address</lable>
-					<input type="text" name="address" placeholder="Address" th:value="${studentDetails.address}">
+					<input type="text" name="address" placeholder="Address" th:value="${studentDetails.address}" maxlength="250">
 				</div>
 				<div class="input-container">
 					<lable>Password</lable>
 					<input type="password" name="password" placeholder="Password"
 						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-					th:value="${studentDetails.password}"	required>
+					th:value="${studentDetails.password}"	required maxlength="100">
 				</div>
-				<input class="forbutton btn" type="submit" name="sign-in" value="updatestudent">
+				<input class="forbutton btn" type="submit" value="update student">
 				<div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				</div>
@@ -73,6 +74,35 @@
 		</div>
 	</div>
 	<script>
+		function Stringcheck(name) {
+			var specialCharacterPattern = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+			var containsSpecialCharacter = specialCharacterPattern.test(name);
+			 var numberPattern = /\d/
+			 var containsNumber = numberPattern.test(name);
+			     return containsSpecialCharacter || containsNumber;
+
+		}
+		
+		function compareDates() {
+			var firstDateInput = document.getElementById("firstdate");
+			var firstDate = firstDateInput.value;
+			var date1 = new Date(firstDate);
+			var currentdate = new Date();
+			var date2 = new Date(currentdate.getFullYear() - 17, currentdate.getMonth(), currentdate.getDate());
+			var Name = document.getElementById("Namee")
+			if (date1 > date2) {
+				alert("Age Must Be 17 Years Old Please Check The DOB");
+				return false;
+			}
+			if (Stringcheck(Name.value)) {
+				alert("Name Should be albhapets Only");
+				return false;
+			}
+			
+			return true
+		}
+		
+		
 		document.getElementById('total_fees').addEventListener('change', function () {
 			var selectedValue = this.value;
 			document.getElementById('penting_fees').value = selectedValue;

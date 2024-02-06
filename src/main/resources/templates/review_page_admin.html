@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Review Page</title>
+	<link href="css/style.css" rel="stylesheet">
+		<style>
+		body{
+			position: absolute;
+		}
+		table{
+			position: relative;
+			top: 30%;
+			border-collapse: collapse;
+			width: 50%;
+			
+		}
+		th,td{
+			padding: 8px;
+			text-align: start;
+			border: 1px solid grey;
+		}
+		thead tr th {
+			color: floralwhite;
+		}
+		tbody tr{
+			background-color: #f5f5f5;
+		}
+		tbody tr:hover{
+			background-color: rgb(219, 208, 219);
+			color: ghostwhite;
+		}
+		th{
+			background-color: #4caf50;
+		}
+		tfoot{
+			background-color: #40524a;
+			color:white;
+		}
+		
+		
+		
+		.card_container{
+			background-color: rgb(240, 240, 240);
+			box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			width: 30rem;
+			display: flex;
+			height: 19rem;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: .65rem;
+			flex-shrink: 0;
+			border-radius: 20px;
+			
+		}
+		
+		.card_details{
+			display: flex;
+			height: 8rem;
+			width: 417px;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-start;
+			flex-shrink:0;
+			}
+			
+		.reviewer_name{
+			max-width: 30rem ;
+			color: #800080;
+			padding: 0.7rem;
+			text-align: center;
+			font-size: 1.6rem;
+			font-weight: 800;
+			
+			
+		}
+		
+		.main_container_card{
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+		}
+			
+		.reviewer_star{
+			max-width: 30rem ;
+			color: #800080;
+			padding: 0.7rem;
+			text-align: center;
+			font-size: 1.6rem;
+			font-weight: 800;
+		}
+		
+		.reviewer_msg{
+			max-width: 30rem ;
+			color: #800080;
+			padding: 0.7rem;
+			text-align: center;
+			font-size: 1.6rem;
+			font-weight: 800;
+		}
+	</style>
+</head>
+<body >
+		<nav class="navbar">
+		<div class="navbar-container">
+			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+									<a class="forbutton navbtn" href="/login">Menu</a>
+			 <a class="forbutton navbtn" href="/logout">LogOut</a>
+			</div>
+	</nav>
+		<table style="width: 80%;">
+			<thead>
+				<tr>
+					<th scope="col">Review Number</th>
+					<th scope="col">Email Id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Star</th>
+					<th scope="col">Message</th>
+					<th scope="col">Action</th>
+					</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ud:${Alreview}">
+					<td th:text="${ud.rino}"></td>
+					<td th:text="${ud.emailid}"></td>								
+					<td th:text="${ud.name}"></td>
+					<td th:text="${ud.star}"></td>
+					<td th:text="${ud.message}"></td>
+					<td><a th:href="@{/deletereview/{rino}(rino=${ud.rino})}">Delete</a></td>
+					</tr>
+			</tbody>
+		</table>
+</body>
+</html>

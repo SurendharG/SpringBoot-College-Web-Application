@@ -16,24 +16,32 @@
 		<div class="form">
 			<form method="post" autocomplete="off" class="login-form" action="/login" th:object="${loginRequest}" onsubmit="return validateInput()">
 				<h2 >Login</h2>
-				<input type="number" name="personalid" placeholder="Personal Id" required id="inputNumber">
-				<input type="password" name="password" placeholder="Password" required id="passwordInput">
-				<input class="forbutton btn" type="submit" name="sign-in" value="Login">
+				<input type="number" name="personalid" placeholder="Personal Id" required id="inputNumber" >
+				<input type="password" name="password" placeholder="Password" required id="passwordInput" maxlength="150" >
+				<input class="forbutton btn" type="submit" value="Login">
 				<div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
-				</div>
+				</div>			
 			</form>
 		</div>
 	</div>
 	<script>
   function validateInput() {
-    var number = document.getElementById("inputNumber").value;
+    var number = Number(document.getElementById("inputNumber").value);
     if (number < 0 || number > 2147483646) {
       alert("Invalid Personal ID");
       return false; // Prevent form submission
     }
     return true; // Allow form submission
   }
+  function showpassword() {
+      const passwordInput = document.getElementById("passwordInput");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
 </script>
 	</body>
 </html>

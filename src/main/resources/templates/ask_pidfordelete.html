@@ -2,25 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Asking Personal ID Page</title>
+	<title>Get Personal ID</title>
 	<link href="css/style.css" rel="stylesheet">"
 </head>
 <body>
 		<nav class="navbar">
 		<div class="navbar-container">
 			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
-			 <a class="forbutton navbtn" href="/Logoutuser">LogOut</a> 
+						<a class="forbutton navbtn" href="/login">Menu</a>
 			 <a href="/adduser" class="forbutton navbtn">Add User</a>
 			<a href="/askid" class="forbutton navbtn">Edit User</a>
 			<a href="/showall" class="forbutton navbtn">All User Details</a>
+						 <a class="forbutton navbtn" href="/logout">LogOut</a> 
+
 		</div>
 	</nav>
 	<div class="login-page">
 		<div class="form">
-			<form method="post" autocomplete="off" class="login-form" action="/askpidfordelete" th:object="${deleteRequest}">
+			<form method="post" autocomplete="off" class="login-form" action="/askpidfordelete" th:object="${deleteRequest}" onsubmit="return validateInput()">
 				<h2>For Delete User Details</h2>
-				<input type="text" name="personalid" placeholder="Personal Id" required>
-				      <input class="forbutton btn" type="submit" name="Edit User" value="askpidfordelete">
+				<input type="text" name="personalid" placeholder="Personal Id" required id="inputNumber">
+				      <input class="forbutton btn" type="submit" value="Check ID">
 				      <div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				</div>
@@ -30,5 +32,15 @@
 			</form>
 		</div>
 	</div>
+	<script>
+  function validateInput() {
+    var number = Number(document.getElementById("inputNumber").value);
+    if (number <= 0 || number > 922337203685477) {
+      alert("Invalid Reg No");
+      return false; 
+    }
+    return true;
+  }
+</script>
 	</body>
 </html>

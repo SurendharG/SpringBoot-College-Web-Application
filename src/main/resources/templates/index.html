@@ -1,93 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>ABC College</title>
-	<link rel="stylesheet" href="css/style2.css">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>ABC College</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style1.css" >
+  </head>
 
-<body>
-	<nav class="navbar">
-		<h1 class="heading">Welcome to the ABC College</h1>
-		<div class="navbar_container">
-			<a class="forbutton navbtn" href="/login">Log In</a>
-			<a class="forbutton navbtn" href="/studentlogin">Student Log In</a>
-		</div>
-	</nav>
-	<header>
-<div><p>Reviews : 
-		<span th:text="${reviewavg}" style="color:darkgreen;"></span>
-		<span style="color:gold;"> &#9733 </span>
-		<span>( <span th:text="${reviewcount}" style="color:darkgreen;"></span> reviews)</span>
-			</p>
-			<a href="/allreviews">See All Reviews</a>
-</div>
-<div><marquee >
-			<ul>
-				Overview
-				<li>Located in [City, Country], ABC Engineering College is a premier institution known for its commitment to excellence in engineering education.</li>
-			</ul>
-			<ul>History:
-				<li>
-					Established in [Year], the college has a rich legacy of nurturing bright minds and producing top-notch engineers.
-				</li>
-			</ul>
-			<ul>Infrastructure:
-				<li>
-					State-of-the-art labs equipped with the latest technology.
-				</li>
-				<li>
-					Modern classrooms with audio-visual aids.
-				</li>
-				<li>
-					Spacious library with a vast collection of books, journals, and digital resources.
-				</li>
-				<li>Wi-Fi-enabled campus ensuring connectivity for students and faculty.
-				</li>
-			</ul>
-			<ul>Courses Offered:
-				<li>
-					Bachelor of Technology (B.Tech) in [Branches like Computer Science, Mechanical, Electronics, etc.]
-				</li>
-				<li>
-					Master of Technology (M.Tech) in [Specializations]
-				</li>
-				<li>
-					PhD programs in various engineering disciplines.
-				</li>
-			</ul>
-			<ul>Placement:
-				<li>
-					Excellent placement record with leading companies visiting the campus for recruitment.
-				</li>
-				<li>
-					Career guidance and training sessions to prepare students for interviews and job placements.
-				</li>
-			</ul>
-			<ul>Research & Development:
-				<li>
-					Active research centers focusing on cutting-edge technologies and innovations.
-				</li>
-				<li>
-					Collaboration with industries and research organizations for collaborative projects.
-				</li>
-			</ul>
-			</marquee>
-	</div>
-	</header>
-	<section>
-		<p>
-			Admission going on for 2024
-		</p>
-		<a  href="/applicationform">Admission Application</a>
-	</section>
-	<footer>
-		<div>
-			<p>ABC College - Chennai</p>
-			<p>04404-111111</p>
-			<p>abcoffice.abcengg.in</p>
-		</div>
-	</footer>
-</body>
+  <body>
+    <div class="main_container">
+      <nav class="navbar">
+        <h1 class="heading">Welcome to the ABC College</h1>
+        <div class="navbar_container">
+          <a class="forbutton navbtn" href="/login">Log In</a>
+          <a class="forbutton navbtn" href="/studentlogin">Student Log In</a>
+        </div>
+      </nav>
 
+      <div class="header_container header">
+        <marquee direction="up">
+          <h2>Overview</h2>
+          <dl>
+            <dt>Located in [City, Country]</dt>
+            <dd>
+              ABC Engineering College is a premier institution known for its
+              commitment to excellence in engineering education.
+            </dd>
+          </dl>
+          <br />
+          <h2>History</h2>
+          <dl>
+            <dd>
+              Established in [Year], the college has a rich legacy of nurturing
+              bright minds and producing top-notch engineers.
+            </dd>
+          </dl>
+          <br />
+          <h2>Infrastructure</h2>
+          <dl>
+            <dd>State-of-the-art labs equipped with the latest technology.</dd>
+            <dd>Modern classrooms with audio-visual aids.</dd>
+            <dd>
+              Spacious library with a vast collection of books, journals, and
+              digital resources.
+            </dd>
+            <dd>
+              Wi-Fi-enabled campus ensuring connectivity for students and
+              faculty.
+            </dd>
+          </dl>
+          <br />
+          <h2>Courses Offered</h2>
+          <dl>
+            <dd>
+              Bachelor of Technology (B.Tech) in [Branches like Computer
+              Science, Mechanical, Electronics, etc.]
+            </dd>
+            <dd>Master of Technology (M.Tech) in [Specializations]</dd>
+            <dd>PhD programs in various engineering disciplines.</dd>
+          </dl>
+          <br />
+          <h2>Placement</h2>
+          <dl>
+            <dd>
+              Excellent placement record with leading companies visiting the
+              campus for recruitment.
+            </dd>
+            <dd>
+              Career guidance and training sessions to prepare students for
+              interviews and job placements.
+            </dd>
+          </dl>
+          <br />
+          <h2>Research & Development</h2>
+          <dl>
+            <dd>
+              Active research centers focusing on cutting-edge technologies and
+              innovations.
+            </dd>
+            <dd>
+              Collaboration with industries and research organizations for
+              collaborative projects.
+            </dd>
+          </dl>
+        </marquee>
+      </div>
+      <div class="review_container">
+        <h2>
+          Reviews :
+          <span th:text="${reviewavg}" id="starcount"></span>
+          <span class="fa fa-star" id="star1"></span>
+          <span class="fa fa-star" id="star2"></span>
+          <span class="fa fa-star" id="star3"></span>
+          <span class="fa fa-star" id="star4"></span>
+          <span class="fa fa-star" id="star5"></span>
+          <span>( <span th:text="${reviewcount}">5</span> reviews)</span>
+        </h2>
+        <a class="forbutton navbtn" href="/allreviews">See All Reviews</a>
+      </div>
+      <div class="admission_container">
+        <h2 id="colorChangeElement">Admission going on for 2024</h2>
+        <a class="forbutton navbtn" href="/applicationform"
+          >Admission Application</a>
+      </div>
+      <footer class="footer_container">
+        <div class="footer_container_left footer_col">
+          <h4>Contact Us</h4>
+          <div class="footer_details_left">
+            <i
+              class="fa fa-map-marker"
+              style="font-size: 20px; color: white"
+            ></i>
+            <p>ABC College - Chennai</p>
+            <i class="fa fa-phone" style="font-size: 20px; color: white"></i>
+            <p>04404-111111</p>
+            <i class="fa fa-envelope" style="font-size: 20px; color: white"></i>
+            <p>abcoffice.abcengg.in</p>
+          </div>
+        </div>
+        <div class="footer_container_right footer_col">
+          <h4>Social Links</h4>
+          <div class="footer_icons_container">
+            <i class="fa fa-instagram social_icon" aria-hidden="true"></i>
+            <i class="fa fa-facebook social_icon" aria-hidden="true"></i>
+            <i class="fa fa-telegram social_icon" aria-hidden="true"></i>
+            <i class="fa fa-twitter social_icon" aria-hidden="true"></i>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      starCount = document.querySelector("#starcount").textContent;
+      starcount=Math.round(starCount)
+      for (let i = 1; i <= starcount; i++) {
+        const starElement = document.getElementById(`star${i}`);
+        if (starElement) {
+          starElement.className = "fa fa-star checked";
+        }
+      }
+
+      setInterval(function () {
+        const randomColor =
+          "#" + Math.floor(Math.random() * 16777215).toString(16);
+        const element = document.getElementById("colorChangeElement");
+        if (element) {
+          element.style.color = randomColor;
+        }
+      }, 1000);
+    </script>
+  </body>
 </html>

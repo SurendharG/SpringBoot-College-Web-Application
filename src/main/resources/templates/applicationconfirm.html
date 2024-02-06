@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Application Page</title>
+	<link href="css/style4.css" rel="stylesheet">
+	<style> 
+		.grid_container{
+			display: grid ;
+			grid-template-columns: 1fr 1fr;
+			grid-auto-rows: minmax(2rem, auto);
+			grid-auto-columns: minmax(3rem, auto);
+			
+			padding: 0.5rem;
+		
+			border: 1px solid greenyellow;
+		}
+		h1{
+			text-align: left;
+		}
+		p{
+			font-weight: 900;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/applicationform" onsubmit="return compareDates()"
+				th:object="${ApplicationRequest}">
+				<br>
+					<p style="text-align:center;">Application Confirmation Page</p><br>
+					<div class="grid_container ">
+					
+			<p>Name : </p>
+			<p th:text="${Applicationconfirm.name}"></p>
+			<p>Parent Name : </p>
+			<p th:text="${Applicationconfirm.parent_name}"></p>
+			<p>Date Of Birth : </p>
+			<p th:text="${Applicationconfirm.dob}"></p>
+			<p>Gender : </p>
+			<p th:text="${Applicationconfirm.gender}"></p>
+			<p>Course : </p>
+			<p th:text="${Applicationconfirm.course}"></p>	
+			<p>Contact No : </p>
+			<p th:text="${Applicationconfirm.contact_no}"></p>	
+			<p>Address : </p>
+			<p th:text="${Applicationconfirm.address}"></p>	
+			<p>Email : </p>
+			<p th:text="${Applicationconfirm.emailid}"></p>
+			<p>SSLC School Name : </p>
+			<p th:text="${Applicationconfirm.sslc_school_name}"></p>
+			<p>SSLC Mark : </p>
+			<p th:text="${Applicationconfirm.sslc_mark}"></p>
+			<p>HSC School Name : </p>
+			<p th:text="${Applicationconfirm.hsc_school_name}"></p>
+			<p>HSC Mark : </p>
+			<p th:text="${Applicationconfirm.hsc_mark}"></p>
+			<p>Diplomo University Name : </p>
+			<p th:text="${Applicationconfirm.diplomo_college_name}"></p>
+			<p>Diplomo Mark : </p>
+			<p th:text="${Applicationconfirm.diplomo_mark}"></p>	
+		</div><br>
+			<input type="hidden" name="name" th:value="${Applicationconfirm.name}"></input>
+			<input type="hidden" name="parent_name" th:value="${Applicationconfirm.parent_name}"></input>
+			<input type="hidden" name="dob" th:value="${Applicationconfirm.dob}"></input>
+			<input type="hidden" name="gender" th:value="${Applicationconfirm.gender}"></input>
+			<input type="hidden" name="course" th:value="${Applicationconfirm.course}"></input>
+			<input type="hidden" name="contact_no" th:value="${Applicationconfirm.contact_no}"></input>
+			<input type="hidden" name="address" th:value="${Applicationconfirm.address}"></input>
+			<input type="hidden" name="emailid" th:value="${Applicationconfirm.emailid}"></input>
+			<input type="hidden" name="sslc_school_name" th:value="${Applicationconfirm.sslc_school_name}"></input>
+			<input type="hidden" name="sslc_mark" th:value="${Applicationconfirm.sslc_mark}"></input>
+			<input type="hidden" name="hsc_school_name" th:value="${Applicationconfirm.hsc_school_name}"></input>
+			<input type="hidden" name="hsc_mark" th:value="${Applicationconfirm.hsc_mark}"></input>
+			<input type="hidden" name="diplomo_college_name" th:value="${Applicationconfirm.diplomo_college_name}"></input>
+			<input type="hidden" name="diplomo_mark" th:value="${Applicationconfirm.diplomo_mark}"></input>						
+		<input class="forbutton btn" type="submit" value="Submit" >
+			</form><div>
+				
+	<form method="post" autocomplete="off" class="login-form" action="/applicationformconfirming"
+				th:object="${Applicationconfirmation}" >
+			<input type="hidden" name="name" th:value="${Applicationconfirm.name}"></input>
+			<input type="hidden" name="parent_name" th:value="${Applicationconfirm.parent_name}"></input>
+			<input type="hidden" name="dob" th:value="${Applicationconfirm.dob}"></input>
+			<input type="hidden" name="gender" th:value="${Applicationconfirm.gender}"></input>
+			<input type="hidden" name="course" th:value="${Applicationconfirm.course}"></input>
+			<input type="hidden" name="contact_no" th:value="${Applicationconfirm.contact_no}"></input>
+			<input type="hidden" name="address" th:value="${Applicationconfirm.address}"></input>
+			<input type="hidden" name="emailid" th:value="${Applicationconfirm.emailid}"></input>
+			<input type="hidden" name="sslc_school_name" th:value="${Applicationconfirm.sslc_school_name}"></input>
+			<input type="hidden" name="sslc_mark" th:value="${Applicationconfirm.sslc_mark}"></input>
+			<input type="hidden" name="hsc_school_name" th:value="${Applicationconfirm.hsc_school_name}"></input>
+			<input type="hidden" name="hsc_mark" th:value="${Applicationconfirm.hsc_mark}"></input>
+			<input type="hidden" name="diplomo_college_name" th:value="${Applicationconfirm.diplomo_college_name}"></input>
+			<input type="hidden" name="diplomo_mark" th:value="${Applicationconfirm.diplomo_mark}"></input>						
+		<input class="forbutton btn" type="submit" value="Edit Details" >
+			</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		function compareDates() {
+				if (confirm("Do you Want To Submit")) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+
+	</script>
+</body>
+
+</html>		

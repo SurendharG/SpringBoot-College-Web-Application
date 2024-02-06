@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
 	<meta charset="utf-8">
-	<title> Student Login Page</title>
+	<title>Student Login Page</title>
 	<link href="css/style.css" rel="stylesheet">"
 </head>
 <body>
@@ -14,11 +13,11 @@
 	</nav>
 	<div class="login-page">
 		<div class="form">
-			<form method="post" autocomplete="off" class="login-form" action="/studentlogin" th:object="${studentloginRequest}">
+			<form method="post" autocomplete="off" class="login-form" action="/studentlogin" th:object="${studentloginRequest}" onsubmit="return validateInput()">
 				<h2 >Student Login</h2>
-				<input type="number" name="regno" placeholder="Reg No" required>
-				<input type="password" name="password" placeholder="Password" required id="passwordInput">
-				<input class="forbutton btn" type="submit" name="sign-in" value="Login">
+				<input type="number" name="regno" placeholder="Reg No" required id="inputNumber">
+				<input type="password" name="password" placeholder="Password" required id="passwordInput" maxlength="150">
+				<input class="forbutton btn" type="submit" value="Login">
 				<div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				</div>
@@ -26,5 +25,14 @@
 		</div>
 	</div>
 	</body>
-
+<script>
+  function validateInput() {
+    var number = Number(document.getElementById("inputNumber").value);
+    if (number < 0 || number > 922337203685477) {
+      alert("Invalid Reg No");
+      return false; 
+    }
+    return true;
+  }
+</script>
 </html>

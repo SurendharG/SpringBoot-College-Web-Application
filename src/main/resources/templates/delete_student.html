@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Add User Page</title>
+	<title>Delete Student Data</title>
 	<link href="css/style4.css" rel="stylesheet">"
 		<style> 
 		.grid_container{
@@ -27,27 +27,18 @@
 	<nav class="navbar">
 		<div class="navbar-container">
 			<a class="forbutton navbtn" href="/">Navigate to Home</a>
-			<a class="forbutton navbtn" href="/logout">LogOut</a>
+						<a href="/stafflogin" class="forbutton navbtn">Menu</a>
 			<a href="/addstudent" class="forbutton navbtn">Add Student</a>
 			<a href="/askregforedit" class="forbutton navbtn">Edit Student</a>
 			<a href="/showallstudentforstaff" class="forbutton navbtn">All Student Details</a>
+			<a class="forbutton navbtn" href="/logout">LogOut</a>
+
 		</div>
 	</nav>
 	<div class="login-page">
 		<div class="form">
-		<form method="post" autocomplete="off" class="login-form" action="/deletestudent" >
-	<!--	<p>Reg No : <span th:text="${studentDetails.regno}"></span></p>
-		<p>Name :   <span th:text="${studentDetails.name}"></span></p>
-		<p>Date Of Birth : <span th:text="${studentDetails.dob}"></span></p>
-		<p>Gender : <span th:text="${studentDetails.gender}"></span></p>
-		<p>Course : <span th:text="${studentDetails.course}"></span></p>
-		<p>Total Fees : <span th:text="${studentDetails.total_fees}"></span></p>
-		<p>Paid Fees : <span th:text="${studentDetails.paid_fees}"></span></p>
-		<p>Pending Fees : <span th:text="${studentDetails.pending_fees}"></span></p>
-		<p>Contact No : <span th:text="${studentDetails.contact_no}"></span></p>
-		<p>Address  : <span th:text="${studentDetails.address}"></span></p>
-		<p>Password : <span th:text="${studentDetails.password}"></span></p>-->
-		<div class="grid_container">
+		<form method="post" autocomplete="off" class="login-form" action="/deletestudent" th:object="${ApplicationRequest}" onsubmit="return ConfirmDelete()">
+			<div class="grid_container">
 			<p>Reg No :</p>
 			<p th:text="${studentDetails.regno}"></p>
 			<p>Name : </p>
@@ -71,12 +62,24 @@
 			<p>Password : </p>
 			<p th:text="${studentDetails.password}"></p>	
 		</div>
-      <input class="forbutton btn" type="submit" name="sign-in" value="DeleteStudent">
+		<input type="hidden" name="regno" th:value="${studentDetails.regno}"></input>
+      <input class="forbutton btn" type="submit"  value="DeleteStudent">
 			<div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				</div>
 			</form>
 		</div>
 	</div>
+	<script>
+		function ConfirmDelete(){
+			if (confirm("Do you Want To Delete This Student Details")) {
+				console.log("!2334")
+					return true;
+				}
+				else {
+									console.log("8582")
+					return false;
+				}		}
+	</script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Get dates For Account History</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+	<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>	
+			 			<a href="/acclogin" class="forbutton navbtn">Menu</a>	
+			 <a href="/payfees" class="forbutton navbtn">Pay Fees</a>
+			 			 <a class="forbutton navbtn" href="/logoutacc">LogOut</a> 
+
+		</div>
+	</nav>
+	<div class="login-page">
+		<div class="form">
+			<form method="post" autocomplete="off" class="login-form" action="/accounthistory" onsubmit="return compareDates()">
+				<div th:if="${error}">
+					<span th:text="${error}" style="color: red;"></span>
+				 </div>
+				 <h2>History</h2>
+				 <label>Start Date</label>
+				 <input class="form_input" type="date" property="none" name="date"  required id="firstdate">
+ 				 <label>End Date</label>
+ 				 <input class="form_input" type="date" property="none" name="name"  required id="seconddate">
+				 <input class="forbutton btn"  type="submit" name="Check Reg No" value="Get Transaction">
+				 <div th:if="${errorMessage}">
+					<span th:text="${errorMessage}" style="color: red;"></span>
+				 </div>
+				<div th:if="${successmessage}">
+					<span th:text="${successmessage}" style="color:green;"></span>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<script>
+        function compareDates() {
+            var firstDateInput = document.getElementById("firstdate");
+            var secondDateInput = document.getElementById("seconddate");
+            var firstDate = firstDateInput.value;
+            var secondDate = secondDateInput.value;
+            var date1 = new Date(firstDate);
+            var date2 = new Date(secondDate);
+          	var date3 = new Date() ;
+          	
+            if(date2>date3 && date1>date3){
+				alert("The Maximum date Should Be Today Both Values are inccorect");
+                return false;}
+            if(date2>date3){
+				alert("The End Date Should be Less than or Equal to Today");
+                return false;}
+            if(date1>date3){
+				alert("The Start  Date Should be Less than or Equal to Today");
+                return false;}
+            if (date1 > date2) {
+                alert("The End date Should Be greater than the Start date.");
+                return false;
+            } 
+            else {
+                return true;
+                   }}
+    </script>
+	</body>
+</html>

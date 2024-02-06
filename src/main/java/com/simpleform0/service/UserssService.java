@@ -51,8 +51,8 @@ public class UserssService {
 		else if(a.equalsIgnoreCase("acc")) {
 			return 4;
 		}
-		else if(a.equals(null)) {
-			return 0;
+		else if(a.equalsIgnoreCase("admin")) {
+			return 1;
 		}
 		else {
 			return 0;
@@ -125,7 +125,13 @@ public class UserssService {
 		}
 		}
 	
-
+	public boolean deletereview(int r) {
+		try{reviewsRepository.deleteById(r);
+		return true;}
+		catch(EntityNotFoundException e) {
+		return false;}
+		
+	}
 
 
 

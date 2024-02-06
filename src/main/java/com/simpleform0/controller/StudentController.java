@@ -26,7 +26,7 @@ public class StudentController implements ErrorController{
 		this.studentService=studentService;
 	}
 	Integer un;
-	String pa;
+	String pa;	 
 	@GetMapping("/staffloginunpa")
 	public String getaccess(Model model,HttpSession session) {
 		 un = (Integer) session.getAttribute("un");
@@ -38,7 +38,7 @@ public class StudentController implements ErrorController{
 		if(authenticated!=null) {	
 			int acn = studentService.accesscheck(un);
 			System.out.println(acn);
-			if(acn==2) {
+			if(acn==2||acn==1) {
 				 model.addAttribute("staffunpa", new Student());
 				    model.addAttribute(model);
 			    return "View_page_staff";
@@ -57,7 +57,7 @@ public class StudentController implements ErrorController{
 			System.out.println(authenticated);
 			if(authenticated!=null) {	
 				int acn = studentService.accesscheck(un);
-				if(acn==2) {
+				if(acn==2||acn==1) {
 					model.addAttribute("checkregnoifrequest", new Student());
 					return "get_regno_add";
 				    }
@@ -89,7 +89,7 @@ public class StudentController implements ErrorController{
 			System.out.println(authenticated);
 			if(authenticated!=null) {	
 				int acn = studentService.accesscheck(un);
-				if(acn==2) {
+				if(acn==2||acn==1) {
 					model.addAttribute("checkregnoifrequest", student);
 					return "get_regno_add";
 				    }
@@ -107,8 +107,8 @@ public class StudentController implements ErrorController{
 		Student d=studentService.save(student);
 		if(d!=null) {
 			model.addAttribute("successmessage", "Student Detail added Successfull");
-			model.addAttribute("checkregnoifrequest", student);
-			return "get_regno_add";
+//			model.addAttribute("checkregnoifrequest", student);
+			return "confirmaddedstudent";
 		}
 		else {
 		model.addAttribute("errorMessage", "Student detail Not added Please Try Again");
@@ -122,7 +122,7 @@ public class StudentController implements ErrorController{
 		System.out.println(authenticated);
 		if(authenticated!=null) {	
 			int acn = studentService.accesscheck(un);
-			if(acn==2) {
+			if(acn==2||acn==1) {
 				System.out.println("4");
 				model.addAttribute("checkregnoedit",new Student());
 				return "get_regno_edit";
@@ -158,7 +158,7 @@ public class StudentController implements ErrorController{
 		if(d!=null) {
 			model.addAttribute("successmessage", "Student Detail Update Successfull");
 			model.addAttribute("checkregnoedit",new Student());
-			return "get_regno_edit";
+			return "confirmeditstudent";
 		}
 		else {
 		model.addAttribute("errorMessage", "Student detail Not Updated Please Try Again");
@@ -172,7 +172,7 @@ public class StudentController implements ErrorController{
 		System.out.println(authenticated);
 		if(authenticated!=null) {	
 			int acn = studentService.accesscheck(un);
-			if(acn==2) {
+			if(acn==2||acn==1) {
 				model.addAttribute("checkregnodelete",new Student());
 				return "get_regno_delete";
 			}
@@ -212,7 +212,7 @@ public class StudentController implements ErrorController{
 		if(d!=null) {
 			model.addAttribute("successmessage", "Student Detail Deleted Successfull");
 			model.addAttribute("deletestudent",std);
-			return "get_regno_delete";
+			return "confirmstudentdelete";
 		}
 		else {
 		model.addAttribute("errorMessage", "Student detail Not Deleted Please Try Again");
@@ -225,7 +225,7 @@ public class StudentController implements ErrorController{
 		System.out.println(authenticated);
 		if(authenticated!=null) {	
 			int acn = studentService.accesscheck(un);
-			if(acn==2) {
+			if(acn==2||acn==1) {
 				List<Student> list = studentService.getAllstudent();
 				if(list==null) {
 				model.addAttribute("errorMessage", "There is no data ");
@@ -291,12 +291,13 @@ public class StudentController implements ErrorController{
 	
 	
 	@GetMapping("/logoutmain")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,Model model) {
 	    un = 0;
 	    pa = null;
 	    session.removeAttribute("un"); 
 	    session.removeAttribute("pa");
-	    return "login_page";
+		model.addAttribute("loginRequest", new UserssModel());
+	    return "confirmlogout";
 	}
 	
 }

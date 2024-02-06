@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>All Student Detail Page</title>
+	<title>Student Details</title>
 	<link href="css/style.css" rel="stylesheet">
 	<style>
 		body{
@@ -11,9 +11,10 @@
 			align-items: center;
 		}
 		table{
+			position: absolute;
+			top:8rem;
 			border-collapse: collapse;
-			width: 50%;
-			
+			width:90%;			
 		}
 		th,td{
 			padding: 8px;
@@ -44,10 +45,11 @@
 			<nav class="navbar">
 		<div class="navbar-container">
 			<a class="forbutton navbtn" href="/">Navigate to Home</a>
-			<a class="forbutton navbtn" href="/logout">LogOut</a>
+					<a href="/stafflogin" class="forbutton navbtn">Menu</a>
 			<a href="/addstudent" class="forbutton navbtn">Add Student</a>
 			<a href="/askregforedit" class="forbutton navbtn">Edit Student</a>
 			<a href="/askregfordelete" class="forbutton navbtn">Delete Student</a>
+						<a class="forbutton navbtn" href="/logout">LogOut</a>
 		</div>
 	</nav>
 

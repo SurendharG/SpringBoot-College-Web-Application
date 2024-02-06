@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Asking REG No Page</title>
+	<title>Get REG No For Adding ADM</title>
 	<link href="css/style.css" rel="stylesheet">"
 </head>
 <body>
 	<nav class="navbar">
 		<div class="navbar-container">
 			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a href="/admlogin" class="forbutton navbtn">Menu</a>
 			<a href="/showallapplications" class="forbutton navbtn">See Application</a>
 			<a href="/editstudentadm" class="forbutton navbtn">Edit Student</a> 
 			<a class="forbutton navbtn" href="/logoutadm">LogOut</a> 
@@ -16,10 +17,10 @@
 	</nav>
 	<div class="login-page">
 		<div class="form">
-			<form method="post" autocomplete="off" class="login-form" action="/admitnewstudentadm" th:object="${checkregnoifrequestadm}">
+			<form method="post" autocomplete="off" class="login-form" action="/admitnewstudentadm" th:object="${checkregnoifrequestadm}" onsubmit="return Checknumber()">
 				 <h2>For Add Student Details</h2>
-				 <input class="form_input" type="number" property="none" name="regno" placeholder=" New Reg No" required>
-				 <input class="forbutton btn"  type="submit" name="Check Reg No" value="checkregnoif">
+				 <input class="form_input" type="number" property="none" name="regno" placeholder=" New Reg No" required id="input">
+				 <input class="forbutton btn"  type="submit"  value="check reg no">
 				 <div th:if="${errorMessage}">
 					<span th:text="${errorMessage}" style="color: red;"></span>
 				 </div>
@@ -29,5 +30,17 @@
 			</form>
 		</div>
 	</div>
+	<script>
+		function Checknumber(){
+			var i=document.getElementById("input").value;
+			if(Number(i)>922337203685477 || Number(i)<=0){
+				alert("Invalid Reg No");
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+	</script>
 	</body>
 </html>

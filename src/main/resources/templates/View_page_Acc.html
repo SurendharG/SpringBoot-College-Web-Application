@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Account Team Page</title>
+	<link href="css/style.css" rel="stylesheet">"
+</head>
+<body>
+		<nav class="navbar">
+		<div class="navbar-container">
+			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
+			 <a class="forbutton navbtn" href="/logoutacc">LogOut</a> 
+		</div>
+	</nav>
+	<div class="login-page" style="width: 50%;">
+		<div class="form">
+	<h1>Welcome Account Team <span th:text="${un}"></span></h1>
+	<br>
+	<div th:if="${error}">
+		<span th:text="${error}" style="color: red;"></span>
+		</div>
+		<div th:if="${successmessage}">
+		<span th:text="${successmessage}" style="color:darkgreen;"></span>
+		</div><br><br>
+		<a href="/payfees" class="forbutton">Pay Fees</a>
+		<a href="/accounthistory" class="forbutton">History</a>
+		</div>
+</div>
+</div>
+	</body>
+</html>

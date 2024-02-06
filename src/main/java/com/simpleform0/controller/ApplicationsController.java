@@ -32,7 +32,7 @@ public class ApplicationsController {
 		if(authenticated!=null) {	
 			int acn = applyService.accesscheck(un);
 			System.out.println(acn);
-			if(acn==3) {
+			if(acn==3||acn==1) {
 				 model.addAttribute("admunpa", new Applications());
 				    model.addAttribute(model);
 			    return "View_page_Adm";
@@ -42,23 +42,37 @@ public class ApplicationsController {
 			}
 		}
 		else {
-			return "redirect:/logoutmain";
+			return "login_page";
 		}
 	}
 	
 	@GetMapping("/applicationform")
 	public String applicationform(@ModelAttribute Applications application,Model model) {
 		model.addAttribute("ApplicationRequest",new Applications());
+		model.addAttribute("Abc","hi");
 		return "application_form";
 	}
+	
+	@PostMapping("/applicationformconfirm")
+	public String postapplicationformconfirm(@ModelAttribute Applications applications,Model model) {
+		model.addAttribute("Applicationconfirmation",new Applications());
+			model.addAttribute("Applicationconfirm", applications);
+			return "applicationconfirm";
+	}
+	@PostMapping("/applicationformconfirming")
+	public String postapplicationformconfirming(@ModelAttribute Applications applications,Model model) {
+		model.addAttribute("Applicationconfirmation",new Applications());
+			model.addAttribute("Applicationconfirm", applications);
+			model.addAttribute("Abcde","hi");
+			return "application_form";
+	}
+	
+
 	@PostMapping("/applicationform")
 	public String postapplicationform(@ModelAttribute Applications applications,Model model) {
 		Applications a=applyService.applyform(applications);
 		if(a!=null) {
-			model.addAttribute("successmessage", "Application Succesfully Submitted");
-			model.addAttribute("id",a.getAid());
-			model.addAttribute("ApplicationRequest",new Applications());
-			return "application_form";
+			return "confirm";
 		}
 		else {
 			model.addAttribute("errormessage", "Application Not Submitted");
@@ -72,15 +86,15 @@ public class ApplicationsController {
 		System.out.println(authenticated);
 		if(authenticated!=null) {	
 			int acn = applyService.accesscheck(un);
-			if(acn==3) {
-				List<Applications> list = applyService.getAllApplication();
-				if(list==null) {
+			if(acn==3||acn==1) {
+				List<Applications> list = applyService.getAllApplication();				
+				if(list.isEmpty()) {
 				model.addAttribute("errorMessage", "There is no data ");
-				model.addAttribute("ShowallApplication", list);
-				return "show_all_applications";
+				return "confirmnullapplication";
 				}
-				else {model.addAttribute("applications", list);}
-				System.out.println(list);
+				else {
+					System.out.println();
+					model.addAttribute("applications", list);}
 				return "show_all_applications";}
 			else {return "login_page";}}
 		else {	return "redirect:/logoutmain";}
@@ -92,22 +106,24 @@ public class ApplicationsController {
 	model.addAttribute("Admission", new Student());
 	return "admission_entry";
 	}
-	@PostMapping("/admitthrowapplication")
-	public String dhbjhv(@ModelAttribute Student student, Model model ){
-		int d=applyService.save(student);
+	@PostMapping("/admitthrowapplication/{aid}")
+	public String dhbjhv(@ModelAttribute Student student, @ModelAttribute Applications applications,Model model ,@PathVariable("aid") int aid){
+		int d=applyService.save(student);	
 		System.out.println(d);
 		System.out.println(student);
 		if(d==1) {
+			applyService.deleteapplication(aid);
 			List<Applications> list = applyService.getAllApplication();
 			model.addAttribute("applications", list);
 			model.addAttribute("successmessage","Admission Done");
-			return "show_all_applications";
-		}
+			return "ConfirmAdmissionEntry";}
 		else if(d==2) {
-			List<Applications> list = applyService.getAllApplication();
-			model.addAttribute("applications", list);
-			model.addAttribute("errormessage","Admission Not Done Reg No is Already Existing  Please Try Again");
-			return "show_all_applications";}
+			model.addAttribute("applicationss", student);
+			Applications api=applyService.getApplicationById(aid);
+			model.addAttribute("appIPs", api);
+			model.addAttribute("errormessage","Reg No already Exiting");
+			return "admission_entry";}
+		
 		List<Applications> list = applyService.getAllApplication();
 		model.addAttribute("applications", list);
 		model.addAttribute("errormessage","Admission Not Done Please Try Again");
@@ -119,7 +135,7 @@ public class ApplicationsController {
 			System.out.println(authenticated);
 			if(authenticated!=null) {	
 				int acn = applyService.accesscheck(un);
-				if(acn==3) {
+				if(acn==3||acn==1) {
 					return "get_regnofromadm";
 				    }
 				else {
@@ -141,6 +157,9 @@ public class ApplicationsController {
 			model.addAttribute("EditstudentRequestFromadm", student);
 			Student list = applyService.getAlldetails(student.getRegno());
 			model.addAttribute("studentDetails", list);
+			System.out.println(list);
+			System.out.println(list);
+			System.out.println(list);
 			return "Edit_student_fromadm";
 			}
 	}
@@ -150,7 +169,7 @@ public class ApplicationsController {
 		Student check= applyService.saving(student);
 		if (check != null) {
 			model.addAttribute("successmessage", "Student Detail Update Successfull");
-			return "get_regnofromadm";
+			return "confirmupdatestudetnadm";
 		} else {
 			model.addAttribute("errorMessage", "Student detail Not Updated Please Try Again");
 			return "get_regnofromadm";
@@ -162,7 +181,7 @@ public class ApplicationsController {
 		System.out.println(authenticated);
 		if(authenticated!=null) {	
 			int acn = applyService.accesscheck(un);
-			if(acn==3) {
+			if(acn==3||acn==1) {
 			applyService.deleteapplication(aid);
 				return "redirect:/showallapplications";}
 			else {
@@ -178,7 +197,7 @@ public class ApplicationsController {
 			System.out.println(authenticated);
 			if(authenticated!=null) {	
 				int acn = applyService.accesscheck(un);
-				if(acn==3) {
+				if(acn==3||acn==1) {
 					model.addAttribute("checkregnoifrequestadm", new Student());
 					return "get_regno_add_adm";
 				    }
@@ -210,7 +229,7 @@ public class ApplicationsController {
 			System.out.println(authenticated);
 			if(authenticated!=null) {	
 				int acn = applyService.accesscheck(un);
-				if(acn==3) {
+				if(acn==3||acn==1) {
 					model.addAttribute("checkregnoifrequestadm", student);
 					return "get_regno_add_adm";
 				    }
@@ -229,7 +248,7 @@ public class ApplicationsController {
 		if(d!=null) {
 			model.addAttribute("successmessage", "Student Detail added Successfull");
 			model.addAttribute("checkregnoifrequestadm", student);
-			return "get_regno_add_adm";
+			return "confirmstudentaddesadm";
 		}
 		else {
 		model.addAttribute("errorMessage", "Student detail Not added Please Try Again");
@@ -237,15 +256,20 @@ public class ApplicationsController {
 		return "get_regno_add_adm";
 	}}	
 	
-	
-	
-	
 	@GetMapping("/logoutadmin")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,Model model) {
 	    un = 0;
 	    pa = null;
 	    session.removeAttribute("un"); 
 	    session.removeAttribute("pa");
-	    return "login_page";
+		model.addAttribute("loginRequest", new UserssModel());
+	    return "confirmlogout";
 	}
 }
+
+
+
+
+
+
+

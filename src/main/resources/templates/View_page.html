@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Personal Page</title>
+	<title>Admin Page</title>
 				<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,14 +12,19 @@
 			 <a class="forbutton navbtn" href="/logout">LogOut</a> 
 		</div>
 	</nav>
-	<div class="login-page" style="width: 50%;">
+	<div class="login-page" style="width: 90%;">
 		<div class="form">
-	<h1>Welcome Mr/Mrs <span th:text="${Username}"></span></h1>
+	<h1>Welcome Admin </h1>
 	<br>
 			<a href="/adduser" class="forbutton">Add User</a>
 			<a href="/askid" class="forbutton">Edit User</a>
 			<a href="/askpidfordelete" class="forbutton">Delete User</a>
 			<a href="/showall" class="forbutton">All User Details</a>
+			<a href="/stafflogin" class="forbutton">Work as a Staff</a>
+			<a href="/admlogin" class="forbutton">Work as a Admission Team</a>
+			<a href="/acclogin" class="forbutton">Work as a Acccount Team</a>
+			<a href="/reviewbyadmin" class="forbutton">Review Page</a>
+
 			</div>
 </div>
 </body> 

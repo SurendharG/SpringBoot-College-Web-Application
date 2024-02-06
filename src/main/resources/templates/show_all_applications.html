@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>All Student Detail Page</title>
+	<title>Show Applications </title>
 	<link href="css/style.css" rel="stylesheet">
 	<style>
 		body{
@@ -13,8 +13,8 @@
 			top: 30%;
 			border-collapse: collapse;
 			width: 50%;
-			
 		}
+
 		th,td{
 			padding: 8px;
 			text-align: start;
@@ -44,6 +44,7 @@
 			<nav class="navbar">
 		<div class="navbar-container">
 			<a class="forbutton navbtn" href="/">Navigate to Home</a>
+			<a href="/admlogin" class="forbutton navbtn">Menu</a>
 			<a href="/editstudentadm" class="forbutton navbtn">Edit Student</a>
 			<a href="/admitnewstudentadm" class="forbutton navbtn">Admit New Entry</a>
 			<a class="forbutton navbtn" href="/logoutadm">LogOut</a>
@@ -57,8 +58,7 @@
 					<span th:text="${errormessage}" style="color: red;"></span>
 				</div>
 
-		<table action="/showallapplications" th:object="${ShowallStudent}" style="width: 100%;">
-              
+		<table action="/showallapplications" th:object="${ShowallStudent}" style="width: 100%;">         
 			<thead>
 				<tr>
 					<th scope="col">Application Number</th>
@@ -97,9 +97,8 @@
 					<td th:text="${ud.hsc_mark}"></td>
 					<td th:text="${ud.diplomo_college_name}"></td>
 					<td th:text="${ud.diplomo_mark}"></td>
-					<td><a th:href="@{/admitthrowapplication/{aid}(aid=${ud.aid})}">Click</a></td>
+					<td><a th:href="@{/admitthrowapplication/{aid}(aid=${ud.aid})}">Admit</a></td>
 					<td><a th:href="@{/deleteapplication/{aid}(aid=${ud.aid})}">Delete</a></td>
-
 					</tr>
 			</tbody>
 		</table>

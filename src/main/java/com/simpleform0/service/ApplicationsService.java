@@ -45,9 +45,9 @@ public class ApplicationsService {
 		else if(a.equalsIgnoreCase("acc")) {
 			return 4;
 		}
-//		else if(a.equals(null)) {
-//			return 0;
-//		}
+		else if(a.equalsIgnoreCase("admin")) {
+			return 1;
+		}
 		else {
 			return 0;
 		}

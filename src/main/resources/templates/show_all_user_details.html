@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>Edit User Page</title>
+	<title>User Details Page</title>
 	<link href="css/style.css" rel="stylesheet">
 	<style>
 		body{
@@ -11,9 +11,10 @@
 			align-items: center;
 		}
 		table{
+			position: relative;
 			border-collapse: collapse;
 			width: 50%;
-			
+
 		}
 		th,td{
 			padding: 8px;
@@ -44,10 +45,12 @@
 		<nav class="navbar">
 		<div class="navbar-container">
 			 <a class="forbutton navbtn" href="/">Navigate to Home</a>
-			 <a class="forbutton navbtn" href="/Logoutuser">LogOut</a> 
+			 						<a class="forbutton navbtn" href="/login">Menu</a>
 			 <a href="/adduser" class="forbutton navbtn">Add User</a>
 			 <a href="/askpidfordelete" class="forbutton navbtn">Delete User</a>
 			<a href="/askid" class="forbutton navbtn">Edit User</a>
+						 <a class="forbutton navbtn" href="/logout">LogOut</a> 
+
 		</div>
 	</nav>
 		<table action="/showall" th:object="${ShowalluserRequest}">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleform0.model.Applications;
 import com.simpleform0.model.Reviews;
+import com.simpleform0.model.Student;
 import com.simpleform0.model.UserssModel;
 import com.simpleform0.service.UserssService;
 
@@ -35,13 +37,12 @@ public class UserssController implements ErrorController{
 	@GetMapping("/")
 	public String index(@ModelAttribute Applications application,Model model) {
 		model.addAttribute("successmessage", "Application Succesfully Submitted");
+		System.out.println(un + pa);
 		int rc=userssService.getreviewscount();
 		double r=userssService.getreviewsaverage();
         double ra = Math.round(r * 10.0) / 10.0;
 		model.addAttribute("reviewcount", rc);
-		model.addAttribute("reviewavg", ra);
-
-		
+		model.addAttribute("reviewavg", ra);	
 		return "index";
 	}
 	@GetMapping("/adduser")
@@ -49,6 +50,7 @@ public class UserssController implements ErrorController{
 		UserssModel authenticated = userssService.authenticate(un,pa);
 		if (authenticated != null) {
 		model.addAttribute("AdduserRequest", new UserssModel());
+		model.addAttribute("Abcd", "Nothing");
 		return "add_user";
 		} else {
 			return "login_page";
@@ -61,18 +63,42 @@ public class UserssController implements ErrorController{
 				userssModel.getPassword(), userssModel.getAccess());
 		if (AddedUser == null) {
 			model.addAttribute("errorMessage", "Sorry...!! this Personal Id Already Existing");
-			model.addAttribute("AdduserRequest", userssModel);
+			model.addAttribute("Adduser",userssModel);
+			model.addAttribute("efgh", "filled");
 			return "add_user";
 		}
+		else {
 		model.addAttribute("succsessmessage", "Users Details Addes Successfully");
 		model.addAttribute("AdduserRequest", userssModel);
-		return "redirect:/adduser";
-	}
+		return "confirmadduser";
+	} }
 	
 	@GetMapping("/login")
-	public String getloginPage(Model model) {
-		model.addAttribute("loginRequest", new UserssModel());
-		return "login_page";
+	public String getloginPage(Model model,@ModelAttribute UserssModel usersModel) {
+		if(un!=0&& !pa.equals(null)) {
+			usersModel=userssService.Edit(un);
+			UserssModel authenticated = userssService.authenticate(un,pa);
+			System.out.println(authenticated);
+			System.out.println(authenticated);
+			if (authenticated != null) {
+				System.out.println(usersModel.getPersonalid());
+				int acn = userssService.accesscheck(usersModel.getPersonalid());
+				System.out.println(acn);
+				if(acn==1) {return "View_page";}
+				else if(acn==2) {model.addAttribute("staffunpa", usersModel);
+					return "redirect:/staffloginunpa";}
+				else if(acn==3) {	model.addAttribute("admunpa", usersModel);
+					return "redirect:/admlogin";}
+				else if(acn==4) {	model.addAttribute("accteam", usersModel);
+				return "redirect:/acclogin";}
+				else {	model.addAttribute("loginRequest", usersModel);
+					return "login_page";}    }
+			else { return "login_page"; }
+		}
+		else {
+			model.addAttribute("loginRequest", new UserssModel());
+			return "login_page";
+		}
 	}
 	@PostMapping("/login")
 	public String login(@ModelAttribute UserssModel usersModel, Model model,HttpSession session) {
@@ -87,9 +113,8 @@ public class UserssController implements ErrorController{
 		if (authenticated != null) {
 			session.setAttribute("un", usersModel.getPersonalid());
 			session.setAttribute("pa", usersModel.getPassword());
-			
 			int acn = userssService.accesscheck(usersModel.getPersonalid());
-			if(acn==4) {
+			if(acn==1) {
 				return "View_page";
 			}
 			else if(acn==2) {
@@ -100,6 +125,8 @@ public class UserssController implements ErrorController{
 				model.addAttribute("admunpa", usersModel);
 				return "redirect:/admlogin";
 			}
+			else if(acn==4) {	model.addAttribute("accteam", usersModel);
+			return "redirect:/acclogin";}
 			else {
 				model.addAttribute("loginRequest", usersModel);
 				return "login_page";
@@ -140,11 +167,8 @@ public class UserssController implements ErrorController{
 			return "ask_pid";
 		} else {
 			model.addAttribute("updateuser", new UserssModel());
-			UserssModel ad=userssService.Edit(usersModel.getPersonalid());
-			model.addAttribute("getpid",ad.getPersonalid());
-			model.addAttribute("getuname", ad.getUsername());
-			model.addAttribute("getpassword", ad.getPassword());
-			model.addAttribute("getaccess", ad.getAccess());
+			UserssModel add=userssService.Edit(usersModel.getPersonalid());
+			model.addAttribute("ad", add);
 			return "Edit_user_page";}
 	}
 	
@@ -155,7 +179,7 @@ public class UserssController implements ErrorController{
 		if(UUD) {
 			model.addAttribute("successmessage", "Update Successfull");
 			model.addAttribute("editRequest", usm);
-			return "ask_pid";
+			return "confirmuserupdate";
 		}
 		else {
 		model.addAttribute("errorMessage", "Data Not Updated Please Try Again");
@@ -196,7 +220,7 @@ public class UserssController implements ErrorController{
 		if(UUD) {
 			model.addAttribute("successmessage", " User Detail Delete Successfull");
 			model.addAttribute("deleteRequest", usm);
-			return "ask_pidfordelete";
+			return "confirmdeleteuser";
 		}
 		else {
 		model.addAttribute("errorMessage", "details was not Deleted Please Try Again");
@@ -239,7 +263,7 @@ public class UserssController implements ErrorController{
 		if(c==1) {
 			model.addAttribute("succsessmessage", "Your Review Submitted ");
 			model.addAttribute("wrireReviewreq", new Reviews());
-				return "write_review";}
+				return "confirmReview";}
 		else if(c==2) {
 			model.addAttribute("errorMessage", "Your already Reviewed... in this Mail id");
 			model.addAttribute("wrireReviewreq", new Reviews());
@@ -253,6 +277,43 @@ public class UserssController implements ErrorController{
 	}
 	
 	
+	@GetMapping("/reviewbyadmin")
+	public String getAllreviewadmin(@ModelAttribute Reviews application,Model model) {
+		UserssModel authenticated = userssService.authenticate(un,pa);
+		System.out.println(authenticated);
+		if(authenticated!=null) {	
+			int acn = userssService.accesscheck(un);
+			if(acn==1) {
+				List<Reviews> l=userssService.getallReviews();
+				System.out.println(l);
+				model.addAttribute("Alreview", l);
+				return "review_page_admin";
+				}
+			else {return "login_page";}}
+		else return "login_page";
+	}
+	@GetMapping("/deletereview/{rino}")
+	public String deleteReview(@ModelAttribute Reviews reviews, Model model,@PathVariable("rino") int rino) {
+	UserssModel authenticated = userssService.authenticate(un,pa);
+		System.out.println(authenticated);
+		if(authenticated!=null) {	
+			int acn = userssService.accesscheck(un);
+			if(acn==1) {
+			userssService.deletereview(rino);
+				return "confirmreviewdelete";}
+			else {
+				return "login_page";
+			}
+		}
+		else {
+			return "redirect:/logoutmain";
+		}}
+	
+
+	@GetMapping("/error")
+	public String Error() {
+		return "error_page";
+	}
 	
 	@GetMapping("/logout")
 	public String logout() {
